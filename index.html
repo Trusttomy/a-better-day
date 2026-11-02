@@ -125,6 +125,19 @@ textarea{min-height:60px;resize:vertical}
 :root[data-theme="dark"]{color-scheme:dark}:root[data-theme="dark"] body{background:#171B20;color:#E7E4DE}:root[data-theme="dark"] .eyebrow{color:#9DB1C4}:root[data-theme="dark"] .muted{color:#9A9EA2}:root[data-theme="dark"] .lbl{color:#9A9EA2}:root[data-theme="dark"] button:focus-visible,:root[data-theme="dark"] input:focus,:root[data-theme="dark"] textarea:focus,:root[data-theme="dark"] select:focus{outline:2px solid #C9A46C}:root[data-theme="dark"] .card{background:#1F242A;border:1px solid #2E343B}:root[data-theme="dark"] .btn{background:#1F242A;color:#E7E4DE;border:1px solid #2E343B}:root[data-theme="dark"] .btn.primary{background:#C9A46C;color:#1A1610;border-color:#C9A46C}:root[data-theme="dark"] .btn.tile{background:#252C33;color:#9DB1C4;border-color:#252C33}:root[data-theme="dark"] .seg button{border:1px solid #2E343B;background:#1F242A;color:#9A9EA2}:root[data-theme="dark"] .seg button[aria-pressed="true"]{background:#E7E4DE;color:#171B20;border-color:#E7E4DE}:root[data-theme="dark"] .pill{background:#252C33;color:#9DB1C4}:root[data-theme="dark"] .pill.ok{background:#8FAE95}:root[data-theme="dark"] .rcard{background:#1F242A;border:1px solid #2E343B}:root[data-theme="dark"] .ex-card{background:#1F242A;border:1px solid #2E343B}:root[data-theme="dark"] .ex-card img{background:#2A2A2A}:root[data-theme="dark"] .ex-card[aria-pressed="true"]{outline:2px solid #C9A46C}:root[data-theme="dark"] .ex-card .tick{background:#C9A46C;color:#1A1610}:root[data-theme="dark"] .tabs button{border:1px solid #2E343B;background:#1F242A;color:#9A9EA2}:root[data-theme="dark"] .tabs button[aria-pressed="true"]{background:#9DB1C4;border-color:#9DB1C4}:root[data-theme="dark"] .li{background:#1F242A;border:1px solid #2E343B}:root[data-theme="dark"] .li img{background:#2A2A2A}:root[data-theme="dark"] .li .grow span{color:#9A9EA2}:root[data-theme="dark"] .icon{border:1px solid #2E343B;background:#1F242A}:root[data-theme="dark"] input,:root[data-theme="dark"] textarea,:root[data-theme="dark"] select{background:#171B20;color:#E7E4DE;border:1px solid #2E343B}:root[data-theme="dark"] .switch input{accent-color:#C9A46C}:root[data-theme="dark"] .warn{background:#252C33}:root[data-theme="dark"] .chip{border:1px solid #2E343B;background:#1F242A;color:#9A9EA2}:root[data-theme="dark"] .chip[aria-pressed="true"]{background:#9DB1C4;border-color:#9DB1C4}:root[data-theme="dark"] /* Deck */
 .deck{background:#171B20}:root[data-theme="dark"] .deck-top{background:#0F1215}:root[data-theme="dark"] .bar i{background:#C9A46C}:root[data-theme="dark"] .stage{background:#2A2A2A}:root[data-theme="dark"] .sheet{background:#1F242A;border-top:1px solid #2E343B}:root[data-theme="dark"] .cue li::marker{color:#9A9EA2}:root[data-theme="dark"] .setrow{border:1px solid #2E343B}:root[data-theme="dark"] .setrow.live{border-color:#C9A46C}:root[data-theme="dark"] .setrow.done .t{color:#8FAE95}:root[data-theme="dark"] .need{color:#9A9EA2}:root[data-theme="dark"] .timer{background:#0F1215}:root[data-theme="dark"] .modal-box{background:#1F242A;border:1px solid #2E343B}:root[data-theme="dark"] .spot-wrap{background:#0F1215}:root[data-theme="dark"] .stickybar{background:#171B20}:root[data-theme="dark"] /* Frame sequence: freeze frames played in a loop with hard cuts */
 .fig{background:#2A2A2A}
+/* Resume prompt, check-in and interval timer */
+.resume{border:2px solid #A9824A;gap:14px}
+.resume h2{font-size:1.6rem}
+.seg.three{grid-template-columns:repeat(3,1fr)}
+.seg button+button{border-left:0}
+.seg.three button:nth-child(2){border-radius:0}
+.linkbtn{background:none;border:0;padding:6px 4px;color:#56708A;font-weight:500;text-decoration:underline;text-underline-offset:3px;min-height:36px}
+.hiit{display:flex;flex-direction:column;align-items:center;gap:8px;border:1px solid #E0DDD6;border-radius:14px;padding:14px}
+.hiit .count{font-size:4.5rem;font-weight:300;line-height:1}
+.hiit.work{border-color:#A9824A}
+.hiit.work .count{color:#A9824A}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .resume{border-color:#C9A46C}:root:not([data-theme="light"]) .linkbtn{color:#9DB1C4}:root:not([data-theme="light"]) .hiit{border-color:#2E343B}:root:not([data-theme="light"]) .hiit.work{border-color:#C9A46C}:root:not([data-theme="light"]) .hiit.work .count{color:#C9A46C}}
+:root[data-theme="dark"] .resume{border-color:#C9A46C}:root[data-theme="dark"] .linkbtn{color:#9DB1C4}:root[data-theme="dark"] .hiit{border-color:#2E343B}:root[data-theme="dark"] .hiit.work{border-color:#C9A46C}:root[data-theme="dark"] .hiit.work .count{color:#C9A46C}
 </style>
 
 <div id="home" class="view"></div>
@@ -151,19 +164,19 @@ textarea{min-height:60px;resize:vertical}
 <div id="modal" class="modal" hidden><div class="modal-box" id="modalBox"></div></div>
 
 <script>
-const EX = {"W01":{"n":"Seated Sun Breathing","ph":"Sun and breath","u":"min","m":3,"p":3,"t":[180,180],"c":["Sit facing the light, eyes closed","Breathe in through the nose for 4, out for 6","Shoulders soft, spine tall"]},"W02":{"n":"Neck Half Circles","ph":"Joint mobility","u":"each way","m":5,"p":5,"t":null,"c":["Chin to chest, then roll ear towards shoulder","Front half only, never behind the head","Slow and controlled"]},"W03":{"n":"Shoulder Rolls and Arm Circles","ph":"Joint mobility","u":"each way","m":10,"p":10,"t":null,"c":["Roll shoulders back 10, then big arm circles","Ribs down, neck relaxed"]},"W04":{"n":"Cat Cow on Fists","ph":"Joint mobility","u":"slow reps","m":8,"p":8,"t":null,"c":["Fists under shoulders keep wrists straight","Round up, then gently arch","Small range through the lower back"]},"W05":{"n":"Standing Hip Circles","ph":"Joint mobility","u":"each way","m":8,"p":8,"t":null,"c":["Hands on hips, knees soft","Big slow circles, upper body quiet"]},"W06":{"n":"Ankle and Wrist Circles","ph":"Joint mobility","u":"each way","m":10,"p":10,"t":null,"c":["Full slow range","Both directions, both sides"]},"W07":{"n":"Gentle Heel Bounce","ph":"Flow and activation","u":"sec","m":60,"p":60,"t":[60,60],"c":["Light and springy","Quiet landings, knees soft","Let the heart rate climb slowly"]},"W08":{"n":"Slow Calf Raises","ph":"Flow and activation","u":"reps","m":15,"p":20,"t":null,"c":["Pause at the top","Lower slowly"]},"W09":{"n":"Standing Torso Twists with Arm Swing","ph":"Flow and activation","u":"reps","m":20,"p":20,"t":null,"c":["Hips stay square","Loose arms, breathe out on each turn"]},"A01":{"n":"Bodyweight Squat","ph":"Strength","u":"reps","m":12,"p":15,"t":null,"c":["Heels down, chest up","Knees follow the toes","Depth that feels fine for your knees"]},"A02":{"n":"Press Up on Fists","ph":"Strength","u":"reps","m":8,"p":12,"t":null,"c":["Straight line head to heels","Elbows about 45 degrees","Fists keep the wrists straight"]},"A03":{"n":"Glute Bridge","ph":"Strength","u":"reps","m":12,"p":15,"t":null,"c":["Drive through the heels","Squeeze 2 seconds at the top","Ribs down, no arch"]},"A04":{"n":"Prone Y T Raises","ph":"Strength","u":"reps","m":8,"p":10,"t":null,"c":["Small lift, thumbs up","Squeeze the shoulder blades","Neck long, eyes down"]},"A05":{"n":"Dead Bug","ph":"Strength","u":"each side","m":6,"p":8,"t":null,"c":["Lower back stays pressed down","Breathe out as the limbs reach","Slow beats fast"]},"A06":{"n":"Star Jumps","ph":"Strength","u":"reps","m":20,"p":30,"t":null,"c":["Soft landings on the balls of the feet","Step it out if the knees complain"]},"B01":{"n":"Reverse Lunge","ph":"Strength","u":"each side","m":8,"p":10,"t":null,"c":["Front knee over the ankle","Torso upright","Back knee hovers, never slams"]},"B02":{"n":"Plank Shoulder Taps","ph":"Strength","u":"total taps","m":16,"p":24,"t":null,"c":["Feet wide for stability","Hips stay level","Slow taps"]},"B03":{"n":"Single Leg Glute Bridge","ph":"Strength","u":"each side","m":8,"p":10,"t":null,"c":["Drive through the planted heel","Hips stay level"]},"B04":{"n":"Reverse Snow Angels","ph":"Strength","u":"reps","m":8,"p":10,"t":null,"c":["Arms hover the whole way","Slow sweep, neck long"]},"B05":{"n":"Forearm Side Plank","ph":"Strength","u":"sec each side","m":20,"p":30,"t":[20,30],"c":["Elbow under the shoulder","Hips lifted, no sagging"]},"B06":{"n":"Cross Body Knee Drives","ph":"Strength","u":"total","m":20,"p":30,"t":null,"c":["Rotate through the torso","Fingertips light, never pull the neck"]},"L01":{"n":"Wide Press Up on Fists","ph":"Library","u":"reps","m":8,"p":12,"t":null,"c":["Fists wider than shoulders","Squeeze the chest up"]},"L02":{"n":"Close Grip Press Up on Fists","ph":"Library","u":"reps","m":6,"p":10,"t":null,"c":["Elbows tucked along the ribs","Stop if the shoulders complain"]},"L03":{"n":"Slow Lowering Press Up on Fists","ph":"Strength","u":"reps","m":5,"p":8,"t":null,"c":["Four seconds down","Push up at normal speed","Body moves as one piece"]},"L04":{"n":"Pike Press Up on Fists","ph":"Library","u":"reps","m":6,"p":8,"t":null,"c":["Hips stay high","Test gently: shoulders and wrists"]},"L05":{"n":"Forearm Plank to Press Up","ph":"Library","u":"total","m":6,"p":10,"t":null,"c":["Hips do not rock","Alternate the lead arm"]},"L06":{"n":"Prone W Pull Downs","ph":"Library","u":"reps","m":10,"p":12,"t":null,"c":["Drive the elbows to the hips","Squeeze the shoulder blades"]},"L07":{"n":"Bird Dog","ph":"Strength","u":"each side","m":6,"p":8,"t":null,"c":["No arching","Pause at full reach","Hips stay level"]},"L08":{"n":"Superman Hold","ph":"Library","u":"sec","m":20,"p":30,"t":[20,30],"c":["Small lift only","Short holds for the lower back"]},"L09":{"n":"Single Leg Bodyweight Deadlift","ph":"Strength","u":"each side","m":6,"p":8,"t":null,"c":["Flat back","Hips square to the floor","Soft standing knee"]},"L10":{"n":"Sumo Squat","ph":"Library","u":"reps","m":12,"p":15,"t":null,"c":["Knees push out over the toes","Chest tall"]},"L11":{"n":"Static Split Squat","ph":"Library","u":"each side","m":8,"p":10,"t":null,"c":["Feet stay planted","Drop straight down"]},"L12":{"n":"Hamstring Walkouts","ph":"Library","u":"reps","m":6,"p":8,"t":null,"c":["Hips stay up","Small heel steps"]},"L13":{"n":"Wall Sit","ph":"Library","u":"sec","m":30,"p":45,"t":[30,45],"c":["Knees no lower than a right angle","Knees over the ankles"]},"L14":{"n":"Squat Pulses","ph":"Library","u":"reps","m":20,"p":30,"t":null,"c":["Shallow range","Heels down"]},"L15":{"n":"Side Lying Leg Raises","ph":"Library","u":"each side","m":12,"p":15,"t":null,"c":["Hips stacked","Lower slowly"]},"L16":{"n":"Donkey Kicks on Forearms","ph":"Library","u":"each side","m":12,"p":15,"t":null,"c":["No back arch","Squeeze at the top"]},"L17":{"n":"Fire Hydrants on Forearms","ph":"Library","u":"each side","m":12,"p":15,"t":null,"c":["Hips stay level","Slow and controlled"]},"L18":{"n":"Forearm Plank","ph":"Library","u":"sec","m":30,"p":45,"t":[30,45],"c":["Glutes squeezed","Ribs down"]},"L19":{"n":"Side Plank Hip Dips","ph":"Library","u":"each side","m":10,"p":12,"t":null,"c":["Elbow under the shoulder","Slow dips"]},"L20":{"n":"Reverse Crunch","ph":"Library","u":"reps","m":10,"p":12,"t":null,"c":["No swinging","Lower slowly"]},"L21":{"n":"Tucked Hollow Hold","ph":"Library","u":"sec","m":20,"p":30,"t":[20,30],"c":["Lower back stays flat","Knees bent to protect the back"]},"L22":{"n":"Bear Plank Hold on Fists","ph":"Strength","u":"sec","m":20,"p":30,"t":[20,30],"c":["Back flat like a table","Knees hover just off the mat","Breathe steadily"]},"L23":{"n":"Skater Hops","ph":"Library","u":"total","m":16,"p":24,"t":null,"c":["Soft landing","Small hops to start"]},"L24":{"n":"Squat Thrusts Without Jump","ph":"Library","u":"reps","m":8,"p":12,"t":null,"c":["Step back, do not jump, to start","Back stays flat"]},"P01":{"n":"Find the Right Muscles","ph":"Pelvic floor","u":"slow tries","m":3,"p":3,"t":null,"c":["Lie on your back, knees bent, feet flat","Squeeze as if holding in wind, and draw the base of the penis up and in","Your testicles should lift slightly; buttocks, thighs and stomach stay soft","Keep breathing the whole time"]},"P02":{"n":"Slow Holds Lying Down","ph":"Pelvic floor","u":"holds","m":10,"p":10,"t":null,"c":["Squeeze and lift, hold, then let go completely","Rest for as long as you held","Breathe normally; never hold your breath"]},"P03":{"n":"Quick Flicks","ph":"Pelvic floor","u":"quick squeezes","m":10,"p":15,"t":null,"c":["Squeeze firmly, then let go straight away","Let it fully relax between each one"]},"P04":{"n":"Standing Holds","ph":"Pelvic floor","u":"holds","m":10,"p":10,"t":null,"c":["Stand tall, feet hip width apart","Same squeeze and lift, now working against gravity","Standing is the hardest position, so it builds the most strength"]},"P05":{"n":"Full Release","ph":"Pelvic floor","u":"min","m":1,"p":1,"t":[60,60],"c":["Sit or lie comfortably and breathe slowly into your belly","Let the pelvic floor soften and drop as you breathe in","A muscle that can fully relax works better than one that stays tight"]},"K01":{"n":"Bridge with Pelvic Lift","ph":"Kegel yoga","u":"breaths","m":6,"p":8,"t":null,"c":["Hold a glute bridge, hips high","Breathe out: squeeze and lift the pelvic floor","Breathe in: let it fully go, hips stay up"]},"K02":{"n":"Garland Squat Release","ph":"Kegel yoga","u":"breaths","m":6,"p":8,"t":null,"c":["Deep squat, feet wide, palms together, elbows pressing knees out","Release only: let the pelvic floor soften and drop on every breath in","Heels down if you can, or rest them on a folded towel"]},"K03":{"n":"Cat Cow with Pelvic Lift","ph":"Kegel yoga","u":"breaths","m":6,"p":8,"t":null,"c":["On fists and knees","Breathe out into cat: round up and lift the pelvic floor","Breathe in into cow: arch gently and let it go"]},"K04":{"n":"Chair Pose Squeeze","ph":"Kegel yoga","u":"breaths","m":5,"p":6,"t":null,"c":["Sit back as if into a chair, arms reaching up","Breathe out: squeeze and lift","Breathe in: release without losing the pose"]},"K05":{"n":"Happy Baby Release","ph":"Kegel yoga","u":"breaths","m":6,"p":8,"t":null,"c":["On your back, hold the outsides of your feet, knees wide","Release only: soften the pelvic floor with each breath in","Rock gently side to side if it feels good"]}};
+const EX = {"W01":{"n":"Seated Sun Breathing","ph":"Sun and breath","u":"min","m":3,"p":3,"t":[180,180],"c":["Sit facing the light, eyes closed","Breathe in through the nose for 4, out for 6","Shoulders soft, spine tall"]},"W02":{"n":"Neck Half Circles","ph":"Joint mobility","u":"each way","m":5,"p":5,"t":null,"c":["Chin to chest, then roll ear towards shoulder","Front half only, never behind the head","Slow and controlled"]},"W03":{"n":"Shoulder Rolls and Arm Circles","ph":"Joint mobility","u":"each way","m":10,"p":10,"t":null,"c":["Roll shoulders back 10, then big arm circles","Ribs down, neck relaxed"]},"W04":{"n":"Cat Cow on Fists","ph":"Joint mobility","u":"slow reps","m":8,"p":8,"t":null,"c":["Fists under shoulders keep wrists straight","Round up, then gently arch","Small range through the lower back"]},"W05":{"n":"Standing Hip Circles","ph":"Joint mobility","u":"each way","m":8,"p":8,"t":null,"c":["Hands on hips, knees soft","Big slow circles, upper body quiet"]},"W06":{"n":"Ankle and Wrist Circles","ph":"Joint mobility","u":"each way","m":10,"p":10,"t":null,"c":["Full slow range","Both directions, both sides"]},"W07":{"n":"Gentle Heel Bounce","ph":"Flow and activation","u":"sec","m":60,"p":60,"t":[60,60],"c":["Light and springy","Quiet landings, knees soft","Let the heart rate climb slowly"]},"W08":{"n":"Slow Calf Raises","ph":"Flow and activation","u":"reps","m":15,"p":20,"t":null,"c":["Pause at the top","Lower slowly"]},"W09":{"n":"Standing Torso Twists with Arm Swing","ph":"Flow and activation","u":"reps","m":20,"p":20,"t":null,"c":["Hips stay square","Loose arms, breathe out on each turn"]},"A01":{"n":"Bodyweight Squat","ph":"Strength","u":"reps","m":12,"p":15,"t":null,"c":["Heels down, chest up","Knees follow the toes","Depth that feels fine for your knees"]},"A02":{"n":"Press Up on Fists","ph":"Strength","u":"reps","m":8,"p":12,"t":null,"c":["Straight line head to heels","Elbows about 45 degrees","Fists keep the wrists straight"]},"A03":{"n":"Glute Bridge","ph":"Strength","u":"reps","m":12,"p":15,"t":null,"c":["Drive through the heels","Squeeze 2 seconds at the top","Ribs down, no arch"]},"A04":{"n":"Prone Y T Raises","ph":"Strength","u":"reps","m":8,"p":10,"t":null,"c":["Small lift, thumbs up","Squeeze the shoulder blades","Neck long, eyes down"]},"A05":{"n":"Dead Bug","ph":"Strength","u":"each side","m":6,"p":8,"t":null,"c":["Lower back stays pressed down","Breathe out as the limbs reach","Slow beats fast"]},"A06":{"n":"Star Jumps","ph":"Strength","u":"reps","m":20,"p":30,"t":null,"c":["Soft landings on the balls of the feet","Step it out if the knees complain"]},"B01":{"n":"Reverse Lunge","ph":"Strength","u":"each side","m":8,"p":10,"t":null,"c":["Front knee over the ankle","Torso upright","Back knee hovers, never slams"]},"B02":{"n":"Plank Shoulder Taps","ph":"Strength","u":"total taps","m":16,"p":24,"t":null,"c":["Feet wide for stability","Hips stay level","Slow taps"]},"B03":{"n":"Single Leg Glute Bridge","ph":"Strength","u":"each side","m":8,"p":10,"t":null,"c":["Drive through the planted heel","Hips stay level"]},"B04":{"n":"Reverse Snow Angels","ph":"Strength","u":"reps","m":8,"p":10,"t":null,"c":["Arms hover the whole way","Slow sweep, neck long"]},"B05":{"n":"Forearm Side Plank","ph":"Strength","u":"sec each side","m":20,"p":30,"t":[20,30],"c":["Elbow under the shoulder","Hips lifted, no sagging"]},"B06":{"n":"Cross Body Knee Drives","ph":"Strength","u":"total","m":20,"p":30,"t":null,"c":["Rotate through the torso","Fingertips light, never pull the neck"]},"L01":{"n":"Wide Press Up on Fists","ph":"Library","u":"reps","m":8,"p":12,"t":null,"c":["Fists wider than shoulders","Squeeze the chest up"]},"L02":{"n":"Close Grip Press Up on Fists","ph":"Library","u":"reps","m":6,"p":10,"t":null,"c":["Elbows tucked along the ribs","Stop if the shoulders complain"]},"L03":{"n":"Slow Lowering Press Up on Fists","ph":"Strength","u":"reps","m":5,"p":8,"t":null,"c":["Four seconds down","Push up at normal speed","Body moves as one piece"]},"L04":{"n":"Pike Press Up on Fists","ph":"Library","u":"reps","m":6,"p":8,"t":null,"c":["Hips stay high","Test gently: shoulders and wrists"]},"L05":{"n":"Forearm Plank to Press Up","ph":"Library","u":"total","m":6,"p":10,"t":null,"c":["Hips do not rock","Alternate the lead arm"]},"L06":{"n":"Prone W Pull Downs","ph":"Library","u":"reps","m":10,"p":12,"t":null,"c":["Drive the elbows to the hips","Squeeze the shoulder blades"]},"L07":{"n":"Bird Dog","ph":"Strength","u":"each side","m":6,"p":8,"t":null,"c":["No arching","Pause at full reach","Hips stay level"]},"L08":{"n":"Superman Hold","ph":"Library","u":"sec","m":20,"p":30,"t":[20,30],"c":["Small lift only","Short holds for the lower back"]},"L09":{"n":"Single Leg Bodyweight Deadlift","ph":"Strength","u":"each side","m":6,"p":8,"t":null,"c":["Flat back","Hips square to the floor","Soft standing knee"]},"L10":{"n":"Sumo Squat","ph":"Library","u":"reps","m":12,"p":15,"t":null,"c":["Knees push out over the toes","Chest tall"]},"L11":{"n":"Static Split Squat","ph":"Library","u":"each side","m":8,"p":10,"t":null,"c":["Feet stay planted","Drop straight down"]},"L12":{"n":"Hamstring Walkouts","ph":"Library","u":"reps","m":6,"p":8,"t":null,"c":["Hips stay up","Small heel steps"]},"L13":{"n":"Wall Sit","ph":"Library","u":"sec","m":30,"p":45,"t":[30,45],"c":["Knees no lower than a right angle","Knees over the ankles"]},"L14":{"n":"Squat Pulses","ph":"Library","u":"reps","m":20,"p":30,"t":null,"c":["Shallow range","Heels down"]},"L15":{"n":"Side Lying Leg Raises","ph":"Library","u":"each side","m":12,"p":15,"t":null,"c":["Hips stacked","Lower slowly"]},"L16":{"n":"Donkey Kicks on Forearms","ph":"Library","u":"each side","m":12,"p":15,"t":null,"c":["No back arch","Squeeze at the top"]},"L17":{"n":"Fire Hydrants on Forearms","ph":"Library","u":"each side","m":12,"p":15,"t":null,"c":["Hips stay level","Slow and controlled"]},"L18":{"n":"Forearm Plank","ph":"Library","u":"sec","m":30,"p":45,"t":[30,45],"c":["Glutes squeezed","Ribs down"]},"L19":{"n":"Side Plank Hip Dips","ph":"Library","u":"each side","m":10,"p":12,"t":null,"c":["Elbow under the shoulder","Slow dips"]},"L20":{"n":"Reverse Crunch","ph":"Library","u":"reps","m":10,"p":12,"t":null,"c":["No swinging","Lower slowly"]},"L21":{"n":"Tucked Hollow Hold","ph":"Library","u":"sec","m":20,"p":30,"t":[20,30],"c":["Lower back stays flat","Knees bent to protect the back"]},"L22":{"n":"Bear Plank Hold on Fists","ph":"Strength","u":"sec","m":20,"p":30,"t":[20,30],"c":["Back flat like a table","Knees hover just off the mat","Breathe steadily"]},"L23":{"n":"Skater Hops","ph":"Library","u":"total","m":16,"p":24,"t":null,"c":["Soft landing","Small hops to start"]},"L24":{"n":"Squat Thrusts Without Jump","ph":"Library","u":"reps","m":8,"p":12,"t":null,"c":["Step back, do not jump, to start","Back stays flat"]},"P01":{"n":"Find the Right Muscles","ph":"Pelvic floor","u":"slow tries","m":3,"p":3,"t":null,"c":["Lie on your back, knees bent, feet flat","Squeeze as if holding in wind, and draw the base of the penis up and in","Your testicles should lift slightly; buttocks, thighs and stomach stay soft","Keep breathing the whole time"]},"P02":{"n":"Slow Holds Lying Down","ph":"Pelvic floor","u":"holds","m":10,"p":10,"t":null,"c":["Squeeze and lift, hold, then let go completely","Rest for as long as you held","Breathe normally; never hold your breath"]},"P03":{"n":"Quick Flicks","ph":"Pelvic floor","u":"quick squeezes","m":10,"p":15,"t":null,"c":["Squeeze firmly, then let go straight away","Let it fully relax between each one"]},"P04":{"n":"Standing Holds","ph":"Pelvic floor","u":"holds","m":10,"p":10,"t":null,"c":["Stand tall, feet hip width apart","Same squeeze and lift, now working against gravity","Standing is the hardest position, so it builds the most strength"]},"P05":{"n":"Full Release","ph":"Pelvic floor","u":"min","m":1,"p":1,"t":[60,60],"c":["Sit or lie comfortably and breathe slowly into your belly","Let the pelvic floor soften and drop as you breathe in","A muscle that can fully relax works better than one that stays tight"]},"K01":{"n":"Bridge with Pelvic Lift","ph":"Kegel yoga","u":"breaths","m":6,"p":8,"t":null,"c":["Hold a glute bridge, hips high","Breathe out: squeeze and lift the pelvic floor","Breathe in: let it fully go, hips stay up"]},"K02":{"n":"Garland Squat Release","ph":"Kegel yoga","u":"breaths","m":6,"p":8,"t":null,"c":["Deep squat, feet wide, palms together, elbows pressing knees out","Release only: let the pelvic floor soften and drop on every breath in","Heels down if you can, or rest them on a folded towel"]},"K03":{"n":"Cat Cow with Pelvic Lift","ph":"Kegel yoga","u":"breaths","m":6,"p":8,"t":null,"c":["On fists and knees","Breathe out into cat: round up and lift the pelvic floor","Breathe in into cow: arch gently and let it go"]},"K04":{"n":"Chair Pose Squeeze","ph":"Kegel yoga","u":"breaths","m":5,"p":6,"t":null,"c":["Sit back as if into a chair, arms reaching up","Breathe out: squeeze and lift","Breathe in: release without losing the pose"]},"K05":{"n":"Happy Baby Release","ph":"Kegel yoga","u":"breaths","m":6,"p":8,"t":null,"c":["On your back, hold the outsides of your feet, knees wide","Release only: soften the pelvic floor with each breath in","Rock gently side to side if it feels good"]},"L25":{"n":"Spiderman Press Up on Fists","ph":"Power","u":"each side","m":4,"p":6,"t":null,"c":["Bring the knee towards the elbow as you lower","Hips level, body in one line","Swap sides each rep"]},"L26":{"n":"Superman Press Up","ph":"Power","u":"reps","m":5,"p":8,"t":null,"c":["Push hard enough to lift the hands and reach forward","Land softly with bent elbows","Low impact: slow press up, then reach one arm forward at the top"]},"L27":{"n":"Burpee","ph":"Power","u":"reps","m":8,"p":12,"t":null,"c":["Hands down, feet back, feet in, jump up","Land softly through the whole foot","Low impact: step back and in, no jump"]},"L28":{"n":"Mountain Climbers","ph":"Power","u":"total knee drives","m":20,"p":30,"t":null,"c":["Hands under the shoulders, hips low","Drive the knees towards the chest","Steady rhythm before speed"]},"L29":{"n":"Jump Squats","ph":"Power","u":"reps","m":10,"p":15,"t":null,"c":["Sit back, then jump straight up","Land softly and sink into the next squat","Low impact: squat, then rise onto tiptoes"]},"L30":{"n":"Plank Jacks","ph":"Power","u":"reps","m":12,"p":20,"t":null,"c":["Strong plank, hips level","Jump the feet wide and back in","Low impact: step one foot out at a time"]}};
 const IMG = {};
 const AREAS = [
   ["warm","Warm-up and breath",["W01","W02","W03","W04","W05","W06","W07","W08","W09"]],
-  ["legs","Legs",["A01","B01","L10","L11","L13","L14"]],
+  ["legs","Legs",["A01","B01","L10","L11","L13","L14","L29"]],
   ["glutes","Glutes and hamstrings",["A03","B03","L09","L12","L15","L16","L17"]],
   ["pelvic","Pelvic floor",["P01","P02","P03","P04","P05"]],
   ["kegel","Kegel yoga",["K01","K02","K03","K04","K05"]],
-  ["core","Core",["A05","B02","B05","B06","L07","L18","L19","L20","L21","L22"]],
-  ["chest","Chest and triceps",["A02","L01","L02","L03","L05"]],
+  ["core","Core",["A05","B02","B05","B06","L07","L18","L19","L20","L21","L22","L28","L30"]],
+  ["chest","Chest and triceps",["A02","L01","L02","L03","L05","L25","L26"]],
   ["back","Back and posture",["A04","B04","L06","L08"]],
   ["shoulders","Shoulders",["L04","B02","L22"]],
-  ["full","Full body",["A06","L23","L24"]]
+  ["full","Full body",["A06","L23","L24","L27","L28","L29","L30"]]
 ];
 const AREA_OF = {}; AREAS.forEach(([k,,l]) => l.forEach(c => { (AREA_OF[c] = AREA_OF[c] || []).push(k); }));
 const AREA_NAME = Object.fromEntries(AREAS.map(a => [a[0], a[1]]));
@@ -172,16 +185,21 @@ const PRESETS = {
   A:{name:"Routine A",kind:"quick",note:"Squat, push, bridge, upper back, core, jumps, hinge, brace",ex:["A01","A02","A03","A04","A05","A06","L09","L22"]},
   B:{name:"Routine B",kind:"quick",note:"Lunge, taps, single leg, posture, sides, rotation, slow push, back",ex:["B01","B02","B03","B04","B05","B06","L03","L07"]},
   C:{name:"Routine C",kind:"quick",note:"Sumo, wide push, bird dog, split squat, plank, skaters, bridge, pull downs",ex:["L10","L01","L07","L11","L18","L23","B03","L06"]},
+  RELAX:{name:"Relaxed day",kind:"quick",note:"Breathing, easy mobility, bridge, bird dog, dead bug and a pelvic floor release",ex:["W01","W02","W03","W04","A03","L07","A05","K02","K05","P05"],warm:false,pelvic:false,kegel:false},
+  POWER:{name:"Power day",kind:"quick",note:"Short warm-up, then explosive pushes, burpees, knee drives, skaters, jump squats and climbers",ex:["W03","W05","W07","L25","L26","L27","B06","L05","L23","L29","L28"],warm:false,pelvic:false,kegel:false},
+  BLAST:{name:"12 minute blast",kind:"quick",note:"Six moves, two rounds, 40 seconds on and 20 off, or set reps",ex:["L27","L28","L29","B06","L30","L23"],warm:false,pelvic:false,kegel:false,hiit:{rounds:2,work:40,rest:20}},
   LEGS:{name:"Legs and glutes",kind:"focus",note:"Squats, lunges, hinges and bridges",ex:["A01","B01","L11","L10","A03","B03","L09","L16"]},
   CORE:{name:"Core",kind:"focus",note:"Front, sides and deep core",ex:["A05","L18","B05","L20","L21","L07","B06","L19"]},
   UPPER:{name:"Upper body",kind:"focus",note:"Push, shoulders and upper back",ex:["A02","L01","L02","L04","A04","B04","L06","L08"]},
   KY:{name:"Kegel yoga",kind:"focus",note:"Pelvic floor squeezes and releases inside yoga poses",ex:["K01","K02","K03","K04","K05"]},
   PF:{name:"Glutes and pelvic floor",kind:"focus",note:"Hips, glutes and a full pelvic floor set",ex:["A03","B03","L15","L16","L17","L12"]}
 };
-const SEQ = {"W01":["W01_1","W01_2","W01_3","W01_3"],"W02":["W02_1","W02_2","W02_3","W02_4"],"W03":["W03_1","W03_2","W03_3","W03_4"],"W04":["W04_1","W04_2","W04_1","W04_3"],"W05":["W05_1","W05_2","W05_3","W05_4"],"W06":["W06_1","W06_2","W06_3","W06_4"],"W07":["W07_1","W07_2","W07_3","W07_2"],"W08":["W08_1","W08_2","W08_3","W08_2"],"W09":["W09_1","W09_2","W09_1","W09_3"],"A01":["A01_1","A01_2","A01_3","A01_2"],"A02":["A02_1","A02_2","A02_3","A02_2"],"A03":["A03_1","A03_2","A03_1","A03_2"],"A04":["A04_1","A04_2","A04_1","A04_3"],"A06":["A06_1","A06_2","A06_3","A06_2"],"B01":["B01_1","B01_2","B01_3","B01_2"],"B02":["B02_1","B02_2","B02_1","B02_3"],"B03":["B03_1","B03_2","B03_3","B03_2"],"B04":["B04_1","B04_2","B04_3","B04_2"],"B06":["B06_1","B06_2","B06_1","B06_3"],"L01":["L01_1","L01_2","L01_3","L01_2"],"L02":["L02_1","L02_1","L02_3","L02_3"],"L04":["L04_1","L04_2","L04_3","L04_2"],"L05":["L05_1","L05_2","L05_3","L05_4"],"L06":["L06_1","L06_2","L06_3","L06_2"],"L07":["L07_1","L07_2","L07_1","L07_2"],"L08":["L08_1","L08_2","L08_3","L08_3"],"L09":["L09_1","L09_2","L09_3","L09_2"],"L10":["L10_1","L10_2","L10_1","L10_2"],"L11":["L11_1","L11_2","L11_1","L11_2"],"L12":["L12_1","L12_2","L12_3","L12_2"],"L13":["L13_1","L13_2","L13_3","L13_3"],"L15":["L15_2","L15_1","L15_3","L15_1"],"L16":["L16_1","L16_2","L16_3","L16_2"],"L17":["L17_1","L17_2","L17_3","L17_2"],"L18":["L18_1","L18_2","L18_2","L18_2"],"L20":["L20_1","L20_2","L20_3","L20_2"],"L21":["L21_1","L21_2","L21_3","L21_3"],"L22":["L22_1","L22_2","L22_2","L22_2"],"L23":["L23_1","L23_2","L23_1","L23_3"],"L24":["L24_1","L24_2","L24_3","L24_2"],"P01":["P01_2","P01_3","P01_1","P01_1"],"P04":["P04_2","P04_3","P04_1","P04_1"],"L03":["A02_1","A02_2","A02_3","A02_2"],"P02":["P01_2","P01_3","P01_1","P01_1"],"P03":["P01_2","P01_3","P01_1","P01_1"],"P05":["P01_1"],"K01":["K01_1","K01_1","K01_2","K01_2"],"K02":["K02_1","K02_1","K02_2","K02_2"],"K03":["K03_1","K03_1","K03_2","K03_2"],"K04":["K04_1","K04_1","K04_2","K04_2"],"K05":["K05_1","K05_1","K05_2","K05_2"],"A05":["A05_1","A05_2","A05_1","A05_3"]};
+const SEQ = {"W01":["W01_1","W01_2","W01_3","W01_3"],"W02":["W02_1","W02_2","W02_3","W02_4"],"W03":["W03_1","W03_2","W03_3","W03_4"],"W04":["W04_1","W04_2","W04_1","W04_3"],"W05":["W05_1","W05_2","W05_3","W05_4"],"W06":["W06_1","W06_2","W06_3","W06_4"],"W07":["W07_1","W07_2","W07_3","W07_2"],"W08":["W08_1","W08_2","W08_3","W08_2"],"W09":["W09_1","W09_2","W09_1","W09_3"],"A01":["A01_1","A01_2","A01_3","A01_2"],"A02":["A02_1","A02_2","A02_3","A02_2"],"A03":["A03_1","A03_2","A03_1","A03_2"],"A04":["A04_1","A04_2","A04_1","A04_3"],"A06":["A06_1","A06_2","A06_3","A06_2"],"B01":["B01_1","B01_2","B01_3","B01_2"],"B02":["B02_1","B02_2","B02_1","B02_3"],"B03":["B03_1","B03_2","B03_3","B03_2"],"B04":["B04_1","B04_2","B04_3","B04_2"],"B06":["B06_1","B06_2","B06_1","B06_3"],"L01":["L01_1","L01_2","L01_3","L01_2"],"L02":["L02_1","L02_1","L02_3","L02_3"],"L04":["L04_1","L04_2","L04_3","L04_2"],"L05":["L05_1","L05_2","L05_3","L05_4"],"L06":["L06_1","L06_2","L06_3","L06_2"],"L07":["L07_1","L07_2","L07_1","L07_2"],"L08":["L08_1","L08_2","L08_3","L08_3"],"L09":["L09_1","L09_2","L09_3","L09_2"],"L10":["L10_1","L10_2","L10_1","L10_2"],"L11":["L11_1","L11_2","L11_1","L11_2"],"L12":["L12_1","L12_2","L12_3","L12_2"],"L13":["L13_1","L13_2","L13_3","L13_3"],"L15":["L15_2","L15_1","L15_3","L15_1"],"L16":["L16_1","L16_2","L16_3","L16_2"],"L17":["L17_1","L17_2","L17_3","L17_2"],"L18":["L18_1","L18_2","L18_2","L18_2"],"L20":["L20_1","L20_2","L20_3","L20_2"],"L21":["L21_1","L21_2","L21_3","L21_3"],"L22":["L22_1","L22_2","L22_2","L22_2"],"L23":["L23_1","L23_2","L23_1","L23_3"],"L24":["L24_1","L24_2","L24_3","L24_2"],"P01":["P01_2","P01_3","P01_1","P01_1"],"P04":["P04_2","P04_3","P04_1","P04_1"],"L03":["A02_1","A02_2","A02_3","A02_2"],"P02":["P01_2","P01_3","P01_1","P01_1"],"P03":["P01_2","P01_3","P01_1","P01_1"],"P05":["P01_1"],"K01":["K01_1","K01_1","K01_2","K01_2"],"K02":["K02_1","K02_1","K02_2","K02_2"],"K03":["K03_1","K03_1","K03_2","K03_2"],"K04":["K04_1","K04_1","K04_2","K04_2"],"K05":["K05_1","K05_1","K05_2","K05_2"],"A05":["A05_1","A05_2","A05_1","A05_3"],"L25":["L25_1","L25_2","L25_3","L25_4"],"L26":["L26_1","L26_2","L26_3","L26_4"],"L27":["L27_1","L27_2","L27_3","L27_4"],"L28":["L28_1","L28_2","L28_3"],"L29":["L29_1","L29_2","L29_3"],"L30":["L30_1","L30_2","L30_3"]};
 const TEMPO = {P01:[5,5],P02:[5,10],P03:[1,1],P04:[5,10],P05:[4,4]};
 
 const $ = s => document.querySelector(s);
+/* A missing exercise frame leaves the grey stage showing rather than a broken image */
+document.addEventListener("error", e => { if (e.target && e.target.tagName === "IMG") e.target.style.visibility = "hidden"; }, true);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
 const frames = c => (SEQ[c] || [c + "_1", c + "_2"]);
 const src = k => IMG[k] || ("img/" + k + ".jpg");
@@ -205,51 +223,44 @@ function estimate(c, m){
   if (e.u === "sec") work = n;
   return light(c) ? work + 10 : setsFor(c, m) * work + (setsFor(c, m)) * restFor(m) + 15;
 }
-function planFor(r){ const p = []; if (r.warm !== false) p.push(...WARM); p.push(...r.ex); if (r.pelvic !== false) p.push(...PELVIC.filter(c => !r.ex.includes(c))); if (r.kegel !== false) p.push(...KEGEL.filter(c => !r.ex.includes(c))); return p; }
-const planMins = (r, m) => Math.round(planFor(r).reduce((a, c) => a + estimate(c, m), 0) / 60);
+function planFor(r){ if (r.hiit) return Array.from({length: r.hiit.rounds}, () => r.ex).flat(); const p = []; if (r.warm !== false) p.push(...WARM); p.push(...r.ex); if (r.pelvic !== false) p.push(...PELVIC.filter(c => !r.ex.includes(c))); if (r.kegel !== false) p.push(...KEGEL.filter(c => !r.ex.includes(c))); return p; }
+const planMins = (r, m) => r.hiit ? Math.round(planFor(r).length * (r.hiit.work + r.hiit.rest) / 60) : Math.round(planFor(r).reduce((a, c) => a + estimate(c, m), 0) / 60);
 const areasOf = list => [...new Set(list.flatMap(c => AREA_OF[c] || []))].filter(a => a !== "warm");
 
-/* Storage: built-in app storage when available, browser storage otherwise */
+/* Storage: browser storage on this device */
 const Store = {
-  mode: "local", db: null, uid: null,
   cache: {sessions: [], routines: [], prefs: {mode:"m", spotify:""}, draft: null},
-  async init(){
-    try { const H = window[["cl","aude"].join("")]; const c = H && await Promise.race([H.use("db"), new Promise(r => setTimeout(() => r(null), 6000))]);
-      const u = H && await H.use("user");
-      if (c && u){ this.db = c; this.uid = await u.id(); this.mode = "db"; }
-    } catch(e){ this.mode = "local"; }
-    if (this.mode === "db"){
-      try { const snap = await this.col().get(); snap.docs.forEach(d => { const v = d.data(); if (d.id.startsWith("s_")) this.cache.sessions.push(v.s); else if (d.id === "routines") this.cache.routines = v.list || []; else if (d.id === "prefs") Object.assign(this.cache.prefs, v); else if (d.id === "draft") this.cache.draft = v.s || null; });
-        this.cache.sessions.sort((a, b) => b.date.localeCompare(a.date)); } catch(e){ this.mode = "local"; }
-    }
-    if (this.mode === "local"){
-      const g = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e){ return d; } };
-      this.cache.sessions = g("msr.sessions.v2", g("msr.sessions.v1", [])); this.cache.routines = g("msr.routines.v1", []);
-      Object.assign(this.cache.prefs, g("msr.prefs.v1", {})); this.cache.draft = g("msr.draft.v2", null);
-    }
+  init(){
+    const g = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e){ return d; } };
+    this.cache.sessions = g("msr.sessions.v2", g("msr.sessions.v1", [])); this.cache.routines = g("msr.routines.v1", []);
+    Object.assign(this.cache.prefs, g("msr.prefs.v1", {})); this.cache.draft = g("msr.draft.v2", null);
   },
-  col(){ return this.db.collection("data/users/" + this.uid); },
-  q: Promise.resolve(),
-  write(id, fn){ this.q = this.q.then(fn).catch(() => { this.mode = this.mode; }); return this.q; },
   lset(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch(e){ return false; } },
-  saveSession(s){ this.cache.sessions = [s].concat(this.cache.sessions.filter(x => x.id !== s.id));
-    if (this.mode === "db") return this.write(s.id, () => this.col().doc("s_" + s.id).set({s}));
-    this.lset("msr.sessions.v2", this.cache.sessions); },
-  deleteSession(id){ this.cache.sessions = this.cache.sessions.filter(x => x.id !== id);
-    if (this.mode === "db") return this.write(id, () => this.col().doc("s_" + id).delete());
-    this.lset("msr.sessions.v2", this.cache.sessions); },
-  saveRoutines(){ if (this.mode === "db") return this.write("r", () => this.col().doc("routines").set({list: this.cache.routines})); this.lset("msr.routines.v1", this.cache.routines); },
-  savePrefs(){ if (this.mode === "db") return this.write("p", () => this.col().doc("prefs").set(Object.assign({}, this.cache.prefs))); this.lset("msr.prefs.v1", this.cache.prefs); },
-  dt: null,
-  saveDraft(s){ this.cache.draft = s; clearTimeout(this.dt); this.dt = setTimeout(() => {
-    if (this.mode === "db") this.write("d", () => s ? this.col().doc("draft").set({s: JSON.parse(JSON.stringify(s))}) : this.col().doc("draft").delete());
-    else this.lset("msr.draft.v2", s); }, 600); }
+  saveSession(s){ this.cache.sessions = [s].concat(this.cache.sessions.filter(x => x.id !== s.id)); this.lset("msr.sessions.v2", this.cache.sessions); },
+  deleteSession(id){ this.cache.sessions = this.cache.sessions.filter(x => x.id !== id); this.lset("msr.sessions.v2", this.cache.sessions); },
+  saveRoutines(){ this.lset("msr.routines.v1", this.cache.routines); },
+  savePrefs(){ this.lset("msr.prefs.v1", this.cache.prefs); },
+  /* Drafts are written shortly after the last change; flush() writes a pending one straight away */
+  dt: null, pending: false,
+  saveDraft(s){ this.cache.draft = s; this.pending = true; clearTimeout(this.dt); this.dt = setTimeout(() => this.flush(), 600); },
+  flush(){ clearTimeout(this.dt); this.dt = null; if (!this.pending) return; this.pending = false; this.lset("msr.draft.v2", this.cache.draft); }
 };
 
-let S = null, idx = 0, picked = {routine: null}, building = null, libArea = "legs";
+let S = null, idx = 0, picked = {routine: null}, building = null, libArea = "legs", checkOpen = false, ci = {};
 function show(id){ ["home","lib","build","hist","settings"].forEach(v => $("#" + v).hidden = v !== id); window.scrollTo(0, 0); }
 const allRoutines = () => Object.entries(PRESETS).map(([k, v]) => Object.assign({id: k}, v)).concat(Store.cache.routines.map(r => Object.assign({kind: "mine"}, r)));
 const findRoutine = id => allRoutines().find(r => r.id === id);
+
+/* Morning check-in: today's answers are kept in prefs so it only asks once a day */
+const today = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+const CHECK_Q = [["sleep","How did you sleep?",[["bad","Badly"],["ok","OK"],["well","Well"]]],["feel","How do you feel?",[["rough","Rough"],["fine","Fine"],["great","Great"]]],["time","Time available?",[["12","12 min"],["25","15 to 25 min"]]]];
+function recommend(a, next){
+  if (a.sleep === "bad" || a.feel === "rough") return {id: "RELAX", why: "A gentle session to suit how today is going."};
+  if (a.feel === "great" && a.time === "12") return {id: "BLAST", why: "Feeling great with 12 minutes to spare."};
+  if ((a.feel === "fine" || a.feel === "great") && a.time === "25") return {id: "POWER", why: "Good energy and time for a fuller session."};
+  return {id: next, why: "Your usual rotation."};
+}
+function draftPos(d){ const n = d.items.length, first = d.items.findIndex(it => !it.done && !it.skipped); return typeof d.pos === "number" ? Math.min(d.pos, n) : (first < 0 ? n : first); }
 
 /* Home */
 function renderHome(){
@@ -259,18 +270,26 @@ function renderHome(){
   const next = last && last.routine === "A" ? "B" : last && last.routine === "B" ? "C" : "A";
   const card = r => `<button class="rcard" type="button" data-go-r="${esc(r.id)}"><strong>${esc(r.name)}</strong><span class="muted">${r.ex.length} moves, about ${planMins(r, m)} min</span><span class="muted">${esc(areasOf(r.ex).map(a => AREA_NAME[a]).join(", "))}</span></button>`;
   const R = allRoutines();
+  const C = P.checkin && P.checkin.date === today() ? P.checkin : null, asking = checkOpen || !C;
+  const rec = C && !C.skipped ? recommend(C, next) : null, upId = rec ? rec.id : next, up = PRESETS[upId];
+  const dp = draft ? draftPos(draft) : 0;
   $("#home").innerHTML = `
+    ${draft ? `<section class="card resume" aria-label="Unfinished workout"><div><span class="eyebrow">Unfinished workout</span><h2>${esc(draft.name)}</h2>
+      <p class="muted" style="margin:6px 0 0">${dp >= draft.items.length ? "All exercises done, ready to save" : "Exercise " + (dp + 1) + " of " + draft.items.length}, ${fmt(draft.elapsed || 0)} done. Started ${esc(fmtDate(draft.date))}.</p></div>
+      <button class="btn primary big" id="resume" type="button">Resume</button><button class="btn" id="discard" type="button">Discard</button></section>` : ""}
     <header class="row between"><div style="display:flex;flex-direction:column;gap:6px"><span class="eyebrow">Session ${sessions.length + 1}</span><h1>Morning Sun Routine</h1></div>
       <button class="icon" type="button" id="toSet" aria-label="Settings">&#9881;</button></header>
-    ${draft ? `<div class="card"><div><span class="lbl">Unfinished</span><h3>${esc(draft.name)}</h3><p class="muted" style="margin:4px 0 0">Started ${esc(fmtDate(draft.date))}, ${fmt(draft.elapsed || 0)} done</p></div>
-      <div class="row"><button class="btn primary" id="resume" type="button">Resume</button><button class="btn" id="discard" type="button">Discard</button></div></div>` : ""}
+    ${asking ? `<section class="card" aria-label="Morning check-in"><div class="row between"><span class="lbl">Morning check-in</span><button class="linkbtn" type="button" id="ciSkip">Skip</button></div>
+      ${CHECK_Q.map(([k, q, opts]) => `<div style="display:flex;flex-direction:column;gap:6px"><span>${q}</span><div class="seg${opts.length === 3 ? " three" : ""}" role="group" aria-label="${q}">${opts.map(([v, l]) => `<button type="button" data-ci="${k}" data-v="${v}" aria-pressed="${ci[k] === v}">${l}</button>`).join("")}</div></div>`).join("")}
+    </section>` : ""}
     <section class="card" aria-label="Today">
-      <div class="row between"><span class="lbl">Up next</span><div class="seg" role="group" aria-label="Intensity" style="min-width:210px"><button type="button" data-m="m" aria-pressed="${m === "m"}">Moderate</button><button type="button" data-m="p" aria-pressed="${m === "p"}">Punchy</button></div></div>
-      <h2>${esc(PRESETS[next].name)}</h2>
-      <p class="muted" style="margin:0">${esc(PRESETS[next].note)}. Warm-up, ${PRESETS[next].ex.length} strength moves, pelvic floor and Kegel yoga finish. About ${planMins(PRESETS[next], m)} min.</p>
-      <button class="btn primary big" type="button" data-go-r="${next}">Start ${esc(PRESETS[next].name)}</button>
+      <div class="row between"><span class="lbl">${rec ? "Suggested for today" : "Up next"}</span><div class="seg" role="group" aria-label="Intensity" style="min-width:210px"><button type="button" data-m="m" aria-pressed="${m === "m"}">Moderate</button><button type="button" data-m="p" aria-pressed="${m === "p"}">Punchy</button></div></div>
+      <h2>${esc(up.name)}</h2>
+      <p class="muted" style="margin:0">${rec ? esc(rec.why) + " " : ""}${esc(up.note)}.${up.warm === false ? "" : " Warm-up, " + up.ex.length + " strength moves, pelvic floor and Kegel yoga finish."} About ${planMins(up, m)} min.</p>
+      <button class="btn primary big" type="button" data-go-r="${upId}">Start ${esc(up.name)}</button>
+      <div class="row between">${rec ? `<button class="linkbtn" type="button" id="ciOther">Choose something else</button>` : "<span></span>"}${asking ? "" : `<button class="linkbtn" type="button" id="ciOpen">Check in</button>`}</div>
     </section>
-    <section style="display:flex;flex-direction:column;gap:10px"><h3>Quick routines</h3><div class="grid2">${R.filter(r => r.kind === "quick").map(card).join("")}</div></section>
+    <section style="display:flex;flex-direction:column;gap:10px" id="quickList"><h3>Quick routines</h3><div class="grid2">${R.filter(r => r.kind === "quick").map(card).join("")}</div></section>
     <section style="display:flex;flex-direction:column;gap:10px"><h3>Focus</h3><div class="grid2">${R.filter(r => r.kind === "focus").map(card).join("")}</div></section>
     <section style="display:flex;flex-direction:column;gap:10px"><div class="row between"><h3>My routines</h3><button class="btn small" type="button" id="toBuild">Build a routine</button></div>
       ${R.some(r => r.kind === "mine") ? `<div class="grid2">${R.filter(r => r.kind === "mine").map(card).join("")}</div>` : `<p class="muted" style="margin:0">Pick moves from the menu, see the time and areas, and save it here.</p>`}</section>
@@ -280,7 +299,7 @@ function renderHome(){
       <div class="stat"><span class="lbl">Last</span><span class="num" style="font-size:1rem;padding-top:6px">${last ? esc(fmt(last.elapsed || 0) + ", " + new Date(last.date).toLocaleDateString("en-GB",{day:"numeric",month:"short"})) : "None yet"}</span></div>
     </section>
     <div class="grid2"><button class="btn tile" id="toLib" type="button">Exercise menu</button><button class="btn tile" id="toHist" type="button">History</button></div>
-    <p class="muted" style="margin:0;text-align:center">${Store.mode === "db" ? "Saved to your account after every set." : "Saved in this browser after every set."}</p>`;
+    <p class="muted" style="margin:0;text-align:center">Saved in this browser after every set.</p>`;
   const H = $("#home");
   H.querySelectorAll("[data-m]").forEach(b => b.onclick = () => { Store.cache.prefs.mode = b.dataset.m; Store.savePrefs(); renderHome(); });
   H.querySelectorAll("[data-go-r]").forEach(b => b.onclick = () => openRoutine(b.dataset.goR));
@@ -288,20 +307,31 @@ function renderHome(){
   $("#toHist").onclick = () => { renderHist(); show("hist"); };
   $("#toBuild").onclick = () => startBuild(null);
   $("#toSet").onclick = () => { renderSettings(); show("settings"); };
-  if (draft){ $("#resume").onclick = () => openDeck(draft); $("#discard").onclick = () => { Store.saveDraft(null); renderHome(); }; }
+  if (draft){ $("#resume").onclick = () => openDeck(draft); $("#discard").onclick = () => { Store.saveDraft(null); Store.flush(); renderHome(); }; }
+  H.querySelectorAll("[data-ci]").forEach(b => b.onclick = () => { ci[b.dataset.ci] = b.dataset.v;
+    if (CHECK_Q.every(([k]) => ci[k])){ Store.cache.prefs.checkin = Object.assign({date: today()}, ci); Store.savePrefs(); ci = {}; checkOpen = false; }
+    renderHome(); });
+  if ($("#ciSkip")) $("#ciSkip").onclick = () => { Store.cache.prefs.checkin = {date: today(), skipped: true}; Store.savePrefs(); ci = {}; checkOpen = false; renderHome(); };
+  if ($("#ciOpen")) $("#ciOpen").onclick = () => { checkOpen = true; ci = {}; renderHome(); };
+  if ($("#ciOther")) $("#ciOther").onclick = () => $("#quickList").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
 }
 function openRoutine(id){
   const r = findRoutine(id), m = Store.cache.prefs.mode || "m";
-  const plan = planFor(r);
+  const plan = planFor(r), hi = r.hiit, timed = Store.cache.prefs.hiitFmt !== "reps";
+  const line = c => hi ? (timed ? hi.work + "s on, " + hi.rest + "s rest" : rx(c, m) + " " + esc(EX[c].u)) : `${light(c) ? "" : setsFor(c, m) + " x "}${rx(c, m)} ${esc(EX[c].u)}, about ${fmt(estimate(c, m))}`;
   $("#modalBox").innerHTML = `<div class="row between"><span class="eyebrow">${r.kind === "quick" ? "Quick routine" : r.kind === "focus" ? "Focus" : "My routine"}</span><button class="btn small" type="button" id="mClose">Close</button></div>
-    <h2>${esc(r.name)}</h2><p class="muted" style="margin:0">About ${planMins(r, m)} min, ${plan.length} items. Works: ${esc(areasOf(r.ex).map(a => AREA_NAME[a]).join(", "))}.</p>
-    <div class="list">${plan.map(c => `<div class="li"><img src="${thumb(c)}" alt=""><div class="grow"><strong>${esc(EX[c].n)}</strong><span>${light(c) ? "" : setsFor(c, m) + " x "}${rx(c, m)} ${esc(EX[c].u)}, about ${fmt(estimate(c, m))}</span></div></div>`).join("")}</div>
+    <h2>${esc(r.name)}</h2><p class="muted" style="margin:0">About ${planMins(r, m)} min, ${plan.length} ${hi ? "rounds" : "items"}. Works: ${esc(areasOf(r.ex).map(a => AREA_NAME[a]).join(", "))}.</p>
+    ${hi ? `<div class="seg" role="group" aria-label="Format"><button type="button" data-fmt="timed" aria-pressed="${timed}">Timed</button><button type="button" data-fmt="reps" aria-pressed="${!timed}">Reps</button></div>
+      <p class="muted" style="margin:0">${timed ? "Work " + hi.work + " seconds, rest " + hi.rest + ", moving on by itself. A beep marks each change." : "Set reps for each move. Tap Next when you are done."}</p>
+      <div class="warn">Warm up for a few minutes first. The warm-up moves are in the exercise menu.</div>` : ""}
+    <div class="list">${plan.map((c, j) => `<div class="li"><img src="${thumb(c)}" alt=""><div class="grow"><strong>${hi ? (j + 1) + ". " : ""}${esc(EX[c].n)}</strong><span>${line(c)}</span></div></div>`).join("")}</div>
     <button class="btn primary big" type="button" id="goNow">Start</button>
     <div class="row">${r.kind === "mine" ? `<button class="btn small" type="button" id="editR">Edit</button><button class="btn small" type="button" id="delR">Delete</button>` : `<button class="btn small" type="button" id="copyR">Copy and change</button>`}</div>`;
   $("#modal").hidden = false; $("#mClose").onclick = closeModal;
   $("#goNow").onclick = () => { closeModal(); startSession(r, m); };
+  $("#modalBox").querySelectorAll("[data-fmt]").forEach(b => b.onclick = () => { Store.cache.prefs.hiitFmt = b.dataset.fmt; Store.savePrefs(); openRoutine(id); });
   if ($("#editR")) $("#editR").onclick = () => { closeModal(); startBuild(r); };
-  if ($("#copyR")) $("#copyR").onclick = () => { closeModal(); startBuild({name: r.name + " (mine)", ex: r.ex.slice(), warm: true, pelvic: true, kegel: true}); };
+  if ($("#copyR")) $("#copyR").onclick = () => { closeModal(); startBuild({name: r.name + " (mine)", ex: r.ex.slice(), warm: r.warm !== false, pelvic: r.pelvic !== false, kegel: r.kegel !== false}); };
   if ($("#delR")) $("#delR").onclick = () => { Store.cache.routines = Store.cache.routines.filter(x => x.id !== r.id); Store.saveRoutines(); closeModal(); renderHome(); };
 }
 
@@ -324,8 +354,9 @@ function figHTML(c){
 /* Session deck */
 function startSession(r, m){
   const plan = planFor(r);
-  const s = {id: "s" + Date.now(), date: new Date().toISOString(), routine: r.id, name: r.name, mode: m, elapsed: 0,
-    items: plan.map(c => ({code: c, sets: Array.from({length: setsFor(c, m)}, () => ({reps: "", secs: 0})), diff: 0, note: "", done: false, skipped: false}))};
+  const hiit = r.hiit ? {work: r.hiit.work, rest: r.hiit.rest, timed: Store.cache.prefs.hiitFmt !== "reps"} : null;
+  const s = {id: "s" + Date.now(), date: new Date().toISOString(), routine: r.id, name: r.name, mode: m, elapsed: 0, hiit,
+    items: plan.map(c => ({code: c, sets: Array.from({length: hiit ? 1 : setsFor(c, m)}, () => ({reps: "", secs: 0})), diff: 0, note: "", done: false, skipped: false}))};
   Store.saveDraft(s); openDeck(s);
 }
 function tryExercise(c){ closeModal(); const m = Store.cache.prefs.mode || "m"; const s = {id: "t" + Date.now(), date: new Date().toISOString(), routine: "try", name: "Try: " + EX[c].n, mode: m, elapsed: 0, trial: true,
@@ -333,13 +364,14 @@ function tryExercise(c){ closeModal(); const m = Store.cache.prefs.mode || "m"; 
 let live = null, tick = null, wake = null;
 async function keepAwake(){ try { if (navigator.wakeLock) wake = await navigator.wakeLock.request("screen"); } catch(e){} }
 function openDeck(s){
-  S = s; idx = 0; live = null;
-  const firstOpen = S.items.findIndex(it => !it.done && !it.skipped);
+  S = s; idx = 0; live = null; HI = null;
+  const start = draftPos(S);
   $("#slides").innerHTML = S.items.map((it, i) => slideHTML(it, i)).join("") + finalHTML();
   bindSlides(); $("#deck").hidden = false; document.body.style.overflow = "hidden";
   setupMusic();
-  requestAnimationFrame(() => { $("#slides").scrollLeft = Math.max(0, firstOpen) * $("#slides").clientWidth; idx = Math.max(0, firstOpen); updateProgress(); });
+  requestAnimationFrame(() => { $("#slides").scrollLeft = start * $("#slides").clientWidth; idx = start; slideT0 = Date.now(); updateProgress(); });
   clearInterval(tick); tick = setInterval(onTick, 1000); keepAwake();
+  clearInterval(hiInt); if (S.hiit && S.hiit.timed) hiInt = setInterval(hiitStep, 250);
 }
 function setLine(it, i, k){
   const st = it.sets[k], isLive = live && live.i === i && live.k === k, done = st.secs > 0;
@@ -353,6 +385,7 @@ function setLine(it, i, k){
   </div>`;
 }
 function slideHTML(it, i){
+  if (S.hiit) return hiitSlideHTML(it, i);
   const c = it.code, e = EX[c], m = S.mode, warm = light(c), t = secs(c, m);
   const chips = [["1","Easy"],["2","Fine"],["3","Solid"],["4","Hard"],["5","Max"]].map(([n, l]) => `<button type="button" class="chip" data-i="${i}" data-d="${n}" aria-pressed="${it.diff == n}"><b>${n}</b>${l}</button>`).join("");
   const allTimed = it.sets.every(x => x.secs > 0);
@@ -370,6 +403,55 @@ function slideHTML(it, i){
       <div class="nav"><button class="btn" type="button" data-go="${i - 1}" ${i === 0 ? "disabled" : ""}>Back</button><button class="btn primary" type="button" data-next="${i}" ${allTimed || it.skipped ? "" : "disabled"}>Next</button></div>
       <p class="need" id="need${i}" ${allTimed || it.skipped ? "hidden" : ""}>Time every ${warm ? "move" : "set"} to continue. <button class="btn small" type="button" data-skip="${i}" style="margin-left:6px">Skip this one</button></p>
     </div></div></section>`;
+}
+/* Interval slides: timed (work and rest countdown that moves on by itself) or fixed reps */
+function hiitSlideHTML(it, i){
+  const c = it.code, e = EX[c], m = S.mode, n = S.items.length, per = n / 2 || 1, H = S.hiit;
+  return `<section class="slide" data-i="${i}" aria-label="${esc(e.n)}">
+    <div class="stage">${figHTML(c)}</div>
+    <div class="sheet"><div class="sheet-in">
+      <span class="eyebrow">Round ${Math.floor(i / per) + 1} of 2, interval ${i + 1} of ${n}</span>
+      <h2>${esc(e.n)}</h2>
+      ${H.timed ? `<div class="hiit" id="hi${i}" aria-live="polite"><span class="lbl" id="hiL${i}">Ready</span><span class="count num" id="hiC${i}">${H.work}</span><button class="btn primary" type="button" data-hi="${i}">Start</button></div>` :
+        `<div class="rx"><span class="big num">${rx(c, m)}</span><span class="muted">${esc(e.u)}</span></div>
+        <div class="setrow"><span class="lbl">Done</span><span></span><input type="number" inputmode="numeric" min="0" data-reps="${i}_0" value="${esc(it.sets[0].reps)}" placeholder="${rx(c, m)}" aria-label="${esc(e.u)} done"></div>`}
+      <ul class="cue">${e.c.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      <div class="nav"><button class="btn" type="button" data-go="${i - 1}" ${i === 0 ? "disabled" : ""}>Back</button><button class="btn primary" type="button" data-hnext="${i}">${H.timed ? "Skip ahead" : "Next"}</button></div>
+    </div></div></section>`;
+}
+let HI = null, slideT0 = 0, hiInt = null;
+/* HI holds the live interval: slide index, phase (work, rest or paused) and when the phase ends. Wall clock based, so it catches up after the screen sleeps. */
+function hiitStart(i){ HI = {i, phase: "work", end: Date.now() + S.hiit.work * 1000}; beep(); paintHiit(); }
+function hiitDone(i){ const it = S.items[i]; if (!it || it.done) return; it.done = true;
+  it.sets[0].secs = S.hiit.timed ? S.hiit.work : Math.max(1, Math.round((Date.now() - slideT0) / 1000));
+  if (!S.hiit.timed && it.sets[0].reps === "") it.sets[0].reps = String(rx(it.code, S.mode)); persist(); }
+function hiitStep(){
+  if (!S || !HI || HI.phase === "paused") return;
+  let fired = false;
+  while (HI && HI.end <= Date.now()){
+    fired = true;
+    if (HI.phase === "work"){ hiitDone(HI.i); HI.phase = "rest"; HI.end += S.hiit.rest * 1000; if (HI.i + 1 < S.items.length){ HI.i += 1; go(HI.i); } else HI.last = true; }
+    else if (HI.last){ HI = null; go(S.items.length); }
+    else { HI.phase = "work"; HI.end += S.hiit.work * 1000; }
+  }
+  if (fired) beep();
+  paintHiit();
+}
+function hiitToggle(i){
+  if (!HI || HI.i !== i){ hiitStart(i); return; }
+  if (HI.phase === "paused"){ HI.phase = HI.was; HI.end = Date.now() + HI.left; }
+  else { HI.was = HI.phase; HI.left = Math.max(0, HI.end - Date.now()); HI.phase = "paused"; }
+  paintHiit();
+}
+function paintHiit(){
+  if (!S || !S.hiit || !S.hiit.timed) return;
+  const i = HI ? HI.i : idx, L = $("#hiL" + i), C = $("#hiC" + i), box = $("#hi" + i), b = document.querySelector(`[data-hi="${i}"]`);
+  if (!L) return;
+  const ph = HI ? HI.phase : "ready", was = HI && HI.phase === "paused" ? HI.was : ph;
+  const left = !HI ? S.hiit.work : ph === "paused" ? Math.ceil(HI.left / 1000) : Math.ceil((HI.end - Date.now()) / 1000);
+  L.textContent = ph === "paused" ? "Paused" : ph === "work" ? "Work" : ph === "rest" ? (HI.last ? "Rest, then finish" : "Rest, get ready") : "Ready";
+  C.textContent = Math.max(0, left); box.classList.toggle("work", was === "work");
+  b.textContent = ph === "paused" ? "Carry on" : HI ? "Pause" : "Start";
 }
 function finalHTML(){ return `<section class="slide" data-i="end" aria-label="Finish"><div class="sheet" style="margin-top:0;border-radius:0;border-top:0"><div class="sheet-in" id="finalIn"></div></div></section>`; }
 function refreshSets(i){ const it = S.items[i]; $("#sets" + i).innerHTML = it.sets.map((_, k) => setLine(it, i, k)).join(""); bindSetRows(i);
@@ -394,7 +476,7 @@ function onTick(){ if (!S) return; S.elapsed = (S.elapsed || 0) + 1; $("#clock")
 function persist(){ if (S && !S.saved && !S.trial) Store.saveDraft(S); }
 function bindSlides(){
   const root = $("#slides");
-  S.items.forEach((_, i) => bindSetRows(i));
+  if (S.hiit) bindHiit(root); else S.items.forEach((_, i) => bindSetRows(i));
   root.querySelectorAll("textarea[data-note]").forEach(el => el.oninput = () => { S.items[+el.dataset.note].note = el.value; persist(); });
   root.querySelectorAll(".chip").forEach(el => el.onclick = () => { const i = +el.dataset.i; S.items[i].diff = +el.dataset.d; root.querySelectorAll(`.chip[data-i="${i}"]`).forEach(c => c.setAttribute("aria-pressed", c === el)); persist(); });
   root.querySelectorAll("[data-go]").forEach(el => el.onclick = () => go(+el.dataset.go));
@@ -403,9 +485,18 @@ function bindSlides(){
   root.querySelectorAll("[data-swap]").forEach(el => el.onclick = () => openSwap(+el.dataset.swap));
   renderFinal();
 }
+function bindHiit(root){
+  root.querySelectorAll("[data-reps]").forEach(el => el.oninput = () => { const [a, k] = el.dataset.reps.split("_").map(Number); S.items[a].sets[k].reps = el.value; persist(); });
+  root.querySelectorAll("[data-hi]").forEach(b => b.onclick = () => hiitToggle(+b.dataset.hi));
+  root.querySelectorAll("[data-hnext]").forEach(b => b.onclick = () => { const i = +b.dataset.hnext;
+    if (!S.hiit.timed){ hiitDone(i); go(i + 1); return; }
+    if (HI){ if (HI.phase === "work" || HI.was === "work") hiitDone(HI.i); const n = HI.phase === "rest" || HI.was === "rest" ? HI.i : HI.i + 1;
+      if (n < S.items.length && !HI.last){ HI = {i: n, phase: "work", end: Date.now() + S.hiit.work * 1000}; go(n); beep(); paintHiit(); } else { HI = null; go(S.items.length); } }
+    else go(i + 1); });
+}
 function go(i){ const n = S.items.length + 1; i = Math.max(0, Math.min(n - 1, i)); $("#slides").scrollTo({left: i * $("#slides").clientWidth, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"}); }
-function updateProgress(){ const n = S.items.length + 1; document.querySelectorAll("#slides .slide").forEach((el, k) => el.classList.toggle("active", k === idx)); $("#counter").textContent = Math.min(idx + 1, n) + " / " + n; $("#barFill").style.width = ((idx + 1) / n * 100) + "%"; }
-$("#slides").addEventListener("scroll", () => { const w = $("#slides").clientWidth || 1; const i = Math.round($("#slides").scrollLeft / w); if (i !== idx){ idx = i; updateProgress(); if (i === S.items.length) renderFinal(); } }, {passive: true});
+function updateProgress(){ const n = S.items.length + 1; if (S.pos !== idx){ S.pos = idx; persist(); } document.querySelectorAll("#slides .slide").forEach((el, k) => el.classList.toggle("active", k === idx)); $("#counter").textContent = Math.min(idx + 1, n) + " / " + n; $("#barFill").style.width = ((idx + 1) / n * 100) + "%"; }
+$("#slides").addEventListener("scroll", () => { const w = $("#slides").clientWidth || 1; const i = Math.round($("#slides").scrollLeft / w); if (i !== idx){ idx = i; slideT0 = Date.now(); updateProgress(); paintHiit(); if (i === S.items.length) renderFinal(); } }, {passive: true});
 document.addEventListener("keydown", e => { if ($("#deck").hidden || e.target.matches("input,textarea")) return; if (e.key === "ArrowRight") go(idx + 1); if (e.key === "ArrowLeft") go(idx - 1); });
 function renderFinal(){
   const strength = S.items.filter(it => !light(it.code));
@@ -417,13 +508,17 @@ function renderFinal(){
     <div class="card" style="padding:12px 14px"><table style="width:100%;border-collapse:collapse;font-size:.9rem">${rows || "<tr><td class='muted'>Warm-up and pelvic floor only</td></tr>"}</table></div>
     ${S.trial ? `<button class="btn primary big" type="button" id="endTrial">Done</button>` : `<button class="btn primary big" type="button" id="saveSession">${S.saved ? "Saved" : "Save to history"}</button>`}
     <button class="btn" type="button" data-go="${S.items.length - 1}">Back to last exercise</button><p class="muted" id="saveMsg" style="margin:0"></p>`;
-  if ($("#saveSession")){ $("#saveSession").disabled = !!S.saved; $("#saveSession").onclick = async () => { S.saved = true; await Store.saveSession(JSON.parse(JSON.stringify(S))); Store.saveDraft(null);
-    $("#saveMsg").textContent = Store.mode === "db" ? "Saved to your account." : "Saved in this browser."; $("#saveSession").disabled = true; $("#saveSession").textContent = "Saved"; }; }
+  if ($("#saveSession")){ $("#saveSession").disabled = !!S.saved; $("#saveSession").onclick = async () => { S.saved = true; Store.saveSession(JSON.parse(JSON.stringify(S))); Store.saveDraft(null); Store.flush();
+    $("#saveMsg").textContent = "Saved in this browser."; $("#saveSession").disabled = true; $("#saveSession").textContent = "Saved"; }; }
   if ($("#endTrial")) $("#endTrial").onclick = closeDeck;
   $("#finalIn").querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(+b.dataset.go));
 }
-$("#exitBtn").onclick = () => { if (live) stopSet(); persist(); closeDeck(); };
-function closeDeck(){ $("#deck").hidden = true; document.body.style.overflow = ""; clearInterval(tick); try { wake && wake.release(); } catch(e){} wake = null; S = null; live = null; $("#deckSpot").innerHTML = ""; renderHome(); show("home"); }
+$("#exitBtn").onclick = () => { if (live) stopSet(); persist(); Store.flush(); closeDeck(); };
+function closeDeck(){ $("#deck").hidden = true; document.body.style.overflow = ""; clearInterval(tick); clearInterval(hiInt); HI = null; try { wake && wake.release(); } catch(e){} wake = null; S = null; live = null; $("#deckSpot").innerHTML = ""; renderHome(); show("home"); }
+/* Write the draft straight away when the app is hidden or closed, and keep the screen awake on return */
+function saveNow(){ persist(); Store.flush(); }
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") saveNow(); else if (S){ keepAwake(); hiitStep(); } });
+window.addEventListener("pagehide", saveNow);
 window.addEventListener("resize", () => { if (S) $("#slides").scrollLeft = idx * $("#slides").clientWidth; });
 
 /* Rest timer */
@@ -526,7 +621,7 @@ function renderHist(){
   if (cb) cb.onclick = () => { const t = asText(); navigator.clipboard.writeText(t).then(() => $("#copyMsg").textContent = "Copied. Paste into a spreadsheet.").catch(() => { const ta = $("#logText"); ta.hidden = false; ta.value = t; ta.select(); $("#copyMsg").textContent = "Select all and copy the text below."; }); };
   $("#hist").querySelectorAll("[data-del]").forEach(b => b.onclick = () => { const id = b.dataset.del, box = $("#del" + id);
     box.innerHTML = `<span class="muted">Delete this session?</span><button class="btn small primary" type="button" data-yes>Delete</button><button class="btn small" type="button" data-no>Keep</button>`;
-    box.querySelector("[data-yes]").onclick = async () => { await Store.deleteSession(id); renderHist(); }; box.querySelector("[data-no]").onclick = renderHist; });
+    box.querySelector("[data-yes]").onclick = () => { Store.deleteSession(id); renderHist(); }; box.querySelector("[data-no]").onclick = renderHist; });
 }
 function asText(){ const lines = ["date,routine,intensity,exercise,set,reps,seconds,difficulty,notes"];
   Store.cache.sessions.forEach(s => s.items.forEach(it => it.sets.forEach((x, k) => { if (!x.secs) return;
@@ -543,7 +638,7 @@ function renderSettings(){
       <div class="row"><button class="btn primary small" type="button" id="spSave">Save</button>${P.spotify ? `<button class="btn small" type="button" id="spClear">Remove</button>` : ""}<span class="muted" id="spMsg"></span></div>
       ${e ? `<iframe class="spot" style="height:152px" src="${e}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify player"></iframe>` : ""}
     </section>
-    <section class="card"><h3>Storage</h3><p class="muted" style="margin:0">${Store.mode === "db" ? "Your sessions and routines are saved privately to your account, so they follow you between devices." : "Saved in this browser only. Open the online version to keep history across devices."}</p></section>`;
+    <section class="card"><h3>Storage</h3><p class="muted" style="margin:0">Saved in this browser only, on this device.</p></section>`;
   $("#setBack").onclick = () => { renderHome(); show("home"); };
   $("#spSave").onclick = () => { const v = $("#spIn").value.trim(); if (v && !spotifyEmbed(v)){ $("#spMsg").textContent = "That doesn't look like a Spotify link."; return; } P.spotify = v; Store.savePrefs(); renderSettings(); };
   if ($("#spClear")) $("#spClear").onclick = () => { P.spotify = ""; Store.savePrefs(); renderSettings(); };
@@ -552,8 +647,8 @@ function setupMusic(){ const e = spotifyEmbed(Store.cache.prefs.spotify); const 
   b.onclick = () => { if (!w.innerHTML) w.innerHTML = `<iframe class="spot" src="${e}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="Spotify player"></iframe>`; w.hidden = !w.hidden; }; }
 
 /* Start */
-(async () => { await Store.init(); renderHome();
-  const t = (location.hash.match(/try=([A-Z]\d\d)/) || [])[1]; if (t && EX[t]) tryExercise(t); })();
+Store.init(); renderHome();
+{ const t = (location.hash.match(/try=([A-Z]\d\d)/) || [])[1]; if (t && EX[t]) tryExercise(t); }
 </script>
 
 <script>if("serviceWorker" in navigator){addEventListener("load",function(){navigator.serviceWorker.register("sw.js")})}</script></body></html>
